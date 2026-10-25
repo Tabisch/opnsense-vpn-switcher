@@ -1,0 +1,5 @@
+<menu>
+    <Services>
+        <GwSwitch VisibleName="Gateway switcher" url="/ui/gwswitch" cssClass="fa fa-random fa-fw"/>
+    </Services>
+</menu>

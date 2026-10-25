@@ -1,0 +1,44 @@
+<form>
+    <field>
+        <id>gwswitch.general.enabled</id>
+        <label>Enable</label>
+        <type>checkbox</type>
+        <help>Create the aliases, rules and NAT for the profiles below and run the address watcher.</help>
+    </field>
+    <field>
+        <id>gwswitch.general.interfaces</id>
+        <label>Client interfaces</label>
+        <type>select_multiple</type>
+        <help>Networks whose clients can be switched, usually LAN. One set of rules is created per interface.</help>
+    </field>
+    <field>
+        <id>gwswitch.general.wan_interfaces</id>
+        <label>WAN interfaces</label>
+        <type>select_multiple</type>
+        <help>Traffic of a switched client that would leave through one of these interfaces is blocked (leak protection).</help>
+    </field>
+    <field>
+        <id>gwswitch.general.interval</id>
+        <label>Watcher interval (seconds)</label>
+        <type>text</type>
+        <help>How often new addresses of switched clients are picked up, for example new IPv6 privacy addresses.</help>
+    </field>
+    <field>
+        <id>gwswitch.general.kill_states</id>
+        <label>Kill states on switch</label>
+        <type>checkbox</type>
+        <help>Drop open connections of a client when it is switched, so they reconnect through the new gateway at once.</help>
+    </field>
+    <field>
+        <id>gwswitch.general.skip_rules_gw_down</id>
+        <label>Enforce skip rules when gateway is down</label>
+        <type>checkbox</type>
+        <help>Turn on the global "Skip rules when gateway is down" firewall option on apply. Without it a rule whose gateway is down falls back to the default route.</help>
+    </field>
+    <field>
+        <id>gwswitch.general.log</id>
+        <label>Log blocked traffic</label>
+        <type>checkbox</type>
+        <help>Log packets dropped by the kill switch and IPv6 reject rules.</help>
+    </field>
+</form>

@@ -1,0 +1,13 @@
+Switch the gateway single clients use, for example to send one device
+through a WireGuard tunnel while the rest of the network uses WAN.
+
+Clients are matched by MAC address, so they stay on DHCP. IPv6 is either
+routed through the tunnel (with NAT66) or rejected for the switched client
+only. A switched client never falls back to WAN when the tunnel is down.
+
+Plugin Changelog
+================
+
+0.1
+
+* Initial release

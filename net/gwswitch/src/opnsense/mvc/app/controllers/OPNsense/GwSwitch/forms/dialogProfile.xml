@@ -1,0 +1,50 @@
+<form>
+    <field>
+        <id>profile.enabled</id>
+        <label>Enabled</label>
+        <type>checkbox</type>
+        <grid_view>
+            <type>boolean</type>
+            <formatter>rowtoggle</formatter>
+        </grid_view>
+    </field>
+    <field>
+        <id>profile.name</id>
+        <label>Name</label>
+        <type>text</type>
+        <help>Short name, used for the alias gwsw_name. Letters, digits and underscores.</help>
+    </field>
+    <field>
+        <id>profile.gateway4</id>
+        <label>IPv4 gateway</label>
+        <type>dropdown</type>
+        <help>Gateway or gateway group the IPv4 traffic of clients in this profile leaves through, for example the WireGuard gateway.</help>
+    </field>
+    <field>
+        <id>profile.ipv6_mode</id>
+        <label>IPv6</label>
+        <type>dropdown</type>
+        <help>Route IPv6 through an IPv6 gateway when the tunnel has one. Otherwise reject IPv6 for these clients, so apps fall back to IPv4 at once.</help>
+    </field>
+    <field>
+        <id>profile.gateway6</id>
+        <label>IPv6 gateway</label>
+        <type>dropdown</type>
+        <help>Only used when IPv6 is routed.</help>
+    </field>
+    <field>
+        <id>profile.nat</id>
+        <label>Outbound NAT</label>
+        <type>checkbox</type>
+        <help>Create outbound NAT on the gateway's interface, translating clients to the tunnel address (NAT66 for IPv6). Needed for almost every commercial VPN.</help>
+        <grid_view>
+            <type>boolean</type>
+            <formatter>boolean</formatter>
+        </grid_view>
+    </field>
+    <field>
+        <id>profile.description</id>
+        <label>Description</label>
+        <type>text</type>
+    </field>
+</form>
