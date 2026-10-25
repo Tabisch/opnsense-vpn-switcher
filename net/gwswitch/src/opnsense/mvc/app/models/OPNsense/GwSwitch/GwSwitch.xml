@@ -1,0 +1,112 @@
+<model>
+    <mount>//OPNsense/gwswitch</mount>
+    <description>Per-client gateway switcher</description>
+    <version>1.0.0</version>
+    <items>
+        <general>
+            <enabled type="BooleanField">
+                <Default>0</Default>
+                <Required>Y</Required>
+            </enabled>
+            <interfaces type="InterfaceField">
+                <Multiple>Y</Multiple>
+                <Required>Y</Required>
+                <Default>lan</Default>
+            </interfaces>
+            <wan_interfaces type="InterfaceField">
+                <Multiple>Y</Multiple>
+                <Default>wan</Default>
+            </wan_interfaces>
+            <interval type="IntegerField">
+                <Default>5</Default>
+                <Required>Y</Required>
+                <MinimumValue>2</MinimumValue>
+                <MaximumValue>300</MaximumValue>
+                <ValidationMessage>The interval should be between 2 and 300 seconds.</ValidationMessage>
+            </interval>
+            <kill_states type="BooleanField">
+                <Default>1</Default>
+                <Required>Y</Required>
+            </kill_states>
+            <skip_rules_gw_down type="BooleanField">
+                <Default>1</Default>
+                <Required>Y</Required>
+            </skip_rules_gw_down>
+            <log type="BooleanField">
+                <Default>0</Default>
+                <Required>Y</Required>
+            </log>
+        </general>
+        <profiles>
+            <profile type="ArrayField">
+                <enabled type="BooleanField">
+                    <Default>1</Default>
+                    <Required>Y</Required>
+                </enabled>
+                <name type="TextField">
+                    <Required>Y</Required>
+                    <Mask>/^[a-zA-Z0-9_]{1,24}$/</Mask>
+                    <ValidationMessage>Use 1 to 24 letters, digits or underscores.</ValidationMessage>
+                    <Constraints>
+                        <check001>
+                            <ValidationMessage>A profile with this name already exists.</ValidationMessage>
+                            <type>UniqueConstraint</type>
+                        </check001>
+                    </Constraints>
+                </name>
+                <gateway4 type="JsonKeyValueStoreField">
+                    <ConfigdPopulateAct>interface gateways list -g</ConfigdPopulateAct>
+                    <Required>Y</Required>
+                    <ValidationMessage>Choose an IPv4 gateway or gateway group.</ValidationMessage>
+                </gateway4>
+                <gateway6 type="JsonKeyValueStoreField">
+                    <ConfigdPopulateAct>interface gateways list -g</ConfigdPopulateAct>
+                    <BlankDesc>None</BlankDesc>
+                    <ValidationMessage>Choose an IPv6 gateway or gateway group.</ValidationMessage>
+                </gateway6>
+                <ipv6_mode type="OptionField">
+                    <Required>Y</Required>
+                    <Default>reject</Default>
+                    <OptionValues>
+                        <route>Route through the IPv6 gateway</route>
+                        <reject>Reject (suppress IPv6)</reject>
+                    </OptionValues>
+                </ipv6_mode>
+                <nat type="BooleanField">
+                    <Default>1</Default>
+                    <Required>Y</Required>
+                </nat>
+                <description type="DescriptionField"/>
+            </profile>
+        </profiles>
+        <clients>
+            <client type="ArrayField">
+                <enabled type="BooleanField">
+                    <Default>1</Default>
+                    <Required>Y</Required>
+                </enabled>
+                <mac type="MacAddressField">
+                    <Required>Y</Required>
+                    <Constraints>
+                        <check001>
+                            <ValidationMessage>This MAC address is already assigned.</ValidationMessage>
+                            <type>UniqueConstraint</type>
+                        </check001>
+                    </Constraints>
+                </mac>
+                <profile type="ModelRelationField">
+                    <Model>
+                        <profiles>
+                            <source>OPNsense.GwSwitch.GwSwitch</source>
+                            <items>profiles.profile</items>
+                            <display>name</display>
+                        </profiles>
+                    </Model>
+                    <BlankDesc>Default gateway</BlankDesc>
+                    <ValidationMessage>Related profile not found.</ValidationMessage>
+                </profile>
+                <description type="DescriptionField"/>
+            </client>
+        </clients>
+    </items>
+</model>

@@ -1,0 +1,22 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Python checks
+        run: |
+          pip install jinja2
+          python -m unittest discover -s tests -v
+      - name: PHP lint
+        run: find net -name '*.php' -o -name '*.inc' | xargs -n1 php -l
+      - name: PHP checks against OPNsense core
+        run: tests/php/run.sh master

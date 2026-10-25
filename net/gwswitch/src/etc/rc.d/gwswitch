@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# PROVIDE: gwswitch
+# REQUIRE: NETWORKING syslogd
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="gwswitch"
+rcvar="gwswitch_enable"
+
+load_rc_config $name
+
+: ${gwswitch_enable:="NO"}
+
+pidfile="/var/run/${name}.pid"
+procname="/usr/sbin/daemon"
+command="/usr/sbin/daemon"
+command_args="-f -r -P ${pidfile} -t ${name} /usr/local/opnsense/scripts/gwswitch/watcher.py"
+
+run_rc_command "$1"

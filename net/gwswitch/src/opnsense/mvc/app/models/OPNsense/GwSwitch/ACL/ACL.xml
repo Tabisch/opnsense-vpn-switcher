@@ -1,0 +1,10 @@
+<acl>
+    <page-services-gwswitch>
+        <name>Services: Gateway switcher</name>
+        <description>Switch clients between gateways and manage gateway switcher profiles</description>
+        <patterns>
+            <pattern>ui/gwswitch/*</pattern>
+            <pattern>api/gwswitch/*</pattern>
+        </patterns>
+    </page-services-gwswitch>
+</acl>

@@ -1,0 +1,27 @@
+<form>
+    <field>
+        <id>client.enabled</id>
+        <label>Enabled</label>
+        <type>checkbox</type>
+        <grid_view>
+            <type>boolean</type>
+            <formatter>rowtoggle</formatter>
+        </grid_view>
+    </field>
+    <field>
+        <id>client.mac</id>
+        <label>MAC address</label>
+        <type>text</type>
+        <help>The client's MAC address. Devices with a private Wi-Fi address must keep it fixed for this network.</help>
+    </field>
+    <field>
+        <id>client.profile</id>
+        <label>Profile</label>
+        <type>dropdown</type>
+    </field>
+    <field>
+        <id>client.description</id>
+        <label>Description</label>
+        <type>text</type>
+    </field>
+</form>
